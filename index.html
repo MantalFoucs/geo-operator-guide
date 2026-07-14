@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEO 内容运营使用说明</title>
+<style>
+  :root { --ink:#182230; --muted:#667085; --line:#e3e7ec; --paper:#fff; --canvas:#f7f8fa; --blue:#175cd3; --blue-soft:#eef5ff; --teal:#0f766e; --teal-soft:#ecfdf9; --plum:#7e3f98; --plum-soft:#fbf3ff; --amber:#8a5a10; --amber-soft:#fff8e7; --sidebar:264px; }
+  * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; background:var(--canvas); color:var(--ink); font:15px/1.82 "Microsoft YaHei", "Segoe UI", sans-serif; }
+  .sidebar { position:fixed; inset:0 auto 0 0; z-index:4; width:var(--sidebar); padding:26px 16px; background:#101828; color:#d0d5dd; border-right:1px solid #263142; transition:width .22s ease, transform .22s ease; overflow:hidden; }
+  .brand { display:flex; gap:11px; align-items:center; min-width:220px; margin:0 8px 30px; color:#fff; font-weight:700; letter-spacing:0; } .brand-mark { display:grid; place-items:center; width:29px; height:29px; background:#fff; color:#101828; font:700 12px Arial,sans-serif; } .brand small { display:block; color:#98a2b3; font-size:11px; font-weight:400; }
+  .side-label { margin:0 10px 8px; color:#98a2b3; font-size:11px; font-weight:700; } .side-nav { display:grid; gap:2px; min-width:220px; } .side-nav a { display:flex; align-items:center; gap:10px; padding:8px 10px; color:#d0d5dd; text-decoration:none; border-left:2px solid transparent; } .side-nav a:hover { color:#fff; background:#1d2939; } .nav-num { width:25px; color:#84adff; font:11px Consolas,monospace; } .nav-label { white-space:nowrap; }
+  .nav-toggle { position:fixed; z-index:6; top:18px; left:calc(var(--sidebar) - 16px); width:32px; height:32px; border:1px solid #d0d5dd; border-radius:4px; background:#fff; color:#344054; font-size:18px; line-height:1; cursor:pointer; box-shadow:0 2px 8px rgb(16 24 40 / 12%); transition:left .22s ease; } .nav-toggle:hover { background:#f2f4f7; }
+  main { width:min(100% - 64px, 930px); min-height:100vh; margin-left:calc(var(--sidebar) + 64px); padding:64px 0 96px; transition:margin-left .22s ease; }
+  header { position:relative; padding:0 0 42px; border-bottom:1px solid var(--line); } h1,h2,h3,p { margin-top:0; } h1 { max-width:690px; font-size:34px; line-height:1.28; margin-bottom:10px; } h2 { font-size:23px; line-height:1.4; margin-bottom:17px; } h3 { font-size:16px; line-height:1.5; margin:0 0 7px; } p { margin-bottom:13px; } .muted { color:var(--muted); } .eyebrow { color:var(--teal); font-size:12px; font-weight:700; } .toc { display:none; }
+  .os-switch { position:absolute; top:0; right:0; display:inline-flex; border:1px solid var(--line); background:#fff; padding:3px; border-radius:5px; } .os-switch button { min-width:70px; padding:5px 9px; border:0; background:transparent; color:var(--muted); font:600 12px "Microsoft YaHei",sans-serif; cursor:pointer; } .os-switch button.active { background:var(--ink); color:#fff; } .os-mac { display:none; } body[data-os="mac"] .os-windows { display:none; } body[data-os="mac"] .os-mac { display:block; } body[data-os="mac"] span.os-mac { display:inline; }
+  section { padding:46px 0; border-bottom:1px solid var(--line); scroll-margin-top:20px; } section:last-of-type { border-bottom:0; } .flow { display:grid; grid-template-columns:repeat(4,1fr); margin-top:22px; border-top:2px solid var(--ink); border-bottom:1px solid var(--line); } .flow div { min-height:110px; padding:14px 14px 16px 0; margin-right:14px; border-right:1px solid var(--line); } .flow div:not(:first-child) { padding-left:14px; } .flow div:last-child { border-right:0; margin-right:0; } .flow b { display:block; margin-bottom:5px; color:var(--blue); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:19px; } .lane { padding-top:14px; border-top:2px solid var(--line); } .lane.codex { border-color:var(--blue); } .lane.table { border-color:var(--teal); }
+  .step { display:grid; grid-template-columns:34px 1fr; gap:14px; margin:24px 0; } .step > b { display:grid; place-items:center; align-self:start; width:27px; height:27px; background:var(--ink); color:#fff; font:11px Consolas,monospace; }
+  .prompt { margin:14px 0; border-left:3px solid var(--blue); background:var(--blue-soft); padding:15px 17px; white-space:pre-wrap; line-height:1.75; } code { padding:2px 5px; background:#f2f4f7; border-radius:3px; font:13px Consolas,monospace; word-break:break-all; } pre { margin:13px 0; padding:15px 17px; overflow:auto; white-space:pre-wrap; background:#101828; color:#eff4fa; border-radius:4px; font:13px/1.72 Consolas,monospace; }
+  .note { margin:20px 0 0; padding:13px 16px; border-left:3px solid; } .note.green { background:var(--teal-soft); border-color:var(--teal); color:#115e59; } .note.amber { background:var(--amber-soft); border-color:var(--amber); color:#7a4d0b; } details { margin-top:12px; border-top:1px solid var(--line); } summary { padding:13px 0; color:var(--blue); font-weight:700; cursor:pointer; } details > div { padding:0 0 8px; } .example { margin:15px 0; padding:14px 16px; border-left:3px solid var(--plum); background:var(--plum-soft); } .example strong { color:var(--plum); }
+  table { width:100%; border-collapse:collapse; margin-top:13px; } th,td { padding:10px 8px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); } th { color:var(--muted); font-size:13px; font-weight:700; } ol,ul { margin:8px 0 12px; padding-left:22px; } li { margin:5px 0; }
+  body.nav-collapsed { --sidebar:72px; } body.nav-collapsed .brand span, body.nav-collapsed .side-label, body.nav-collapsed .nav-label { display:none; } body.nav-collapsed .brand { min-width:0; margin:0 6px 30px; } body.nav-collapsed .side-nav { min-width:0; } body.nav-collapsed .side-nav a { justify-content:center; padding:9px 0; } body.nav-collapsed .nav-num { width:auto; } body.nav-collapsed main { margin-left:calc(var(--sidebar) + 64px); } body.nav-collapsed .nav-toggle { left:calc(var(--sidebar) - 16px); }
+  @media (max-width:900px) { :root { --sidebar:264px; } main { width:min(100% - 36px, 760px); margin:0 auto; padding:64px 0 72px; } .sidebar { transform:translateX(-100%); } .nav-toggle { left:14px; } body.nav-open .sidebar { transform:translateX(0); box-shadow:18px 0 40px rgb(16 24 40 / 20%); } body.nav-open .nav-toggle { left:230px; } body.nav-collapsed { --sidebar:264px; } body.nav-collapsed .brand span, body.nav-collapsed .side-label, body.nav-collapsed .nav-label { display:initial; } body.nav-collapsed .brand { min-width:220px; margin:0 8px 30px; } body.nav-collapsed .side-nav { min-width:220px; } body.nav-collapsed .side-nav a { justify-content:flex-start; padding:8px 10px; } body.nav-collapsed .nav-num { width:25px; } body.nav-collapsed main { margin:0 auto; } .two { grid-template-columns:1fr; gap:22px; } .flow { grid-template-columns:1fr 1fr; } .flow div:nth-child(2) { border-right:0; } .flow div:nth-child(n+3) { border-top:1px solid var(--line); padding-top:14px; } }
+  @media (max-width:560px) { main { width:min(100% - 28px, 760px); padding-top:58px; } header { padding-top:48px; } .os-switch { left:0; right:auto; } h1 { font-size:28px; } section { padding:34px 0; } .flow { grid-template-columns:1fr; } .flow div,.flow div:not(:first-child) { min-height:auto; padding:12px 0; margin:0; border-right:0; border-top:1px solid var(--line); } .flow div:first-child { border-top:0; } table { font-size:13px; } }
+</style>
+</head>
+<body data-os="windows">
+<button class="nav-toggle" id="nav-toggle" type="button" aria-label="收起目录" title="收起或展开目录">☰</button>
+<aside class="sidebar" id="sidebar">
+  <div class="brand"><span class="brand-mark">GEO</span><span>内容运营<small>操作手册</small></span></div>
+  <p class="side-label">目录</p>
+  <nav class="side-nav" aria-label="文档目录">
+    <a href="#install" title="首次安装"><span class="nav-num">00</span><span class="nav-label">首次安装</span></a>
+    <a href="#chats" title="新建两个对话"><span class="nav-num">01</span><span class="nav-label">新建两个对话</span></a>
+    <a href="#topics" title="生成选题"><span class="nav-num">02</span><span class="nav-label">生成和审核选题</span></a>
+    <a href="#master" title="母版文章"><span class="nav-num">03</span><span class="nav-label">生成母版文章</span></a>
+    <a href="#platform" title="平台版本"><span class="nav-num">04</span><span class="nav-label">生成需要的平台版本</span></a>
+    <a href="#quality" title="调整质量"><span class="nav-num">05</span><span class="nav-label">调整指令与质量</span></a>
+    <a href="#update" title="更新 Skill"><span class="nav-num">06</span><span class="nav-label">更新 Skill</span></a>
+    <a href="#help" title="遇到问题"><span class="nav-num">07</span><span class="nav-label">遇到问题</span></a>
+  </nav>
+</aside>
+<main id="content">
+  <header>
+    <div class="os-switch" aria-label="选择系统">
+      <button type="button" class="active" data-os="windows">Windows</button>
+      <button type="button" data-os="mac">macOS</button>
+    </div>
+    <div class="eyebrow">群接龙 GEO 内容生产</div>
+    <h1>内容运营使用说明</h1>
+    <p class="muted">适用于 GEO Skills 的首次安装和日常使用。日常只需使用 Codex 和企微智慧表格。</p>
+  </header>
+
+  <section id="install">
+    <h2>首次安装</h2>
+    <p>已经可以正常使用的同事跳过这一节。首次安装只做一次；完成后按下面的日常流程操作。</p>
+    <details>
+      <summary>点击展开：安装 GEO Skills</summary>
+      <div>
+        <div class="step"><b>1</b><div><h3>安装 Git</h3><div class="os-windows"><p>在 Windows 搜索并打开 PowerShell，执行：</p><pre>winget install --id Git.Git -e --source winget</pre><p>完成后关闭 PowerShell，再重新打开一个普通 PowerShell 窗口。</p></div><div class="os-mac"><p>打开“终端”，执行：</p><pre>xcode-select --install</pre><p>按系统提示完成安装。已安装开发者工具时，这一步可跳过。</p></div></div></div>
+        <div class="step"><b>2</b><div><h3>下载 Skill 仓库</h3><div class="os-windows"><pre>git clone https://github.com/MantalFoucs/GEO-skills.git "$env:USERPROFILE\.codex\GEO-skills"</pre></div><div class="os-mac"><pre>git clone https://github.com/MantalFoucs/GEO-skills.git "$HOME/.codex/GEO-skills"</pre></div></div></div>
+        <div class="step"><b>3</b><div><h3>安装两个 Skill</h3><p>以下命令按顺序逐行执行：</p><div class="os-windows"><pre>New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills"</pre><pre>cmd /c mklink /J "%USERPROFILE%\.codex\skills\geo-topic-generation" "%USERPROFILE%\.codex\GEO-skills\geo-topic-generation"</pre><pre>cmd /c mklink /J "%USERPROFILE%\.codex\skills\geo-article-production" "%USERPROFILE%\.codex\GEO-skills\geo-article-production"</pre></div><div class="os-mac"><pre>mkdir -p "$HOME/.codex/skills"</pre><pre>ln -s "$HOME/.codex/GEO-skills/geo-topic-generation" "$HOME/.codex/skills/geo-topic-generation"</pre><pre>ln -s "$HOME/.codex/GEO-skills/geo-article-production" "$HOME/.codex/skills/geo-article-production"</pre></div></div></div>
+        <div class="step"><b>4</b><div><h3>配置企微自动写入</h3><p>需要自动创建企微文档、写入选题库和内容库时，向<strong>陈乙辉</strong>索取配置内容。不要在 Codex 对话、工作群或 GitHub 中发送 Key。</p><div class="os-windows"><pre>New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\geo-skills"</pre><pre>notepad "$env:USERPROFILE\.config\geo-skills\.env"</pre></div><div class="os-mac"><pre>mkdir -p "$HOME/.config/geo-skills"</pre><pre>touch "$HOME/.config/geo-skills/.env" && open -e "$HOME/.config/geo-skills/.env"</pre></div><p>打开后粘贴陈乙辉提供的配置内容，保存即可。</p></div></div>
+        <div class="step"><b>5</b><div><h3>重新打开 Codex</h3><p>完全退出并重新打开 Codex，然后新建“选题”和“文章”两个对话开始使用。</p></div></div>
+      </div>
+    </details>
+    <details>
+      <summary>点击展开：GitHub 仓库没有权限怎么办</summary>
+      <div><p>把 GitHub 用户名发给<strong>陈乙辉</strong>，接受他发出的私有仓库邀请后，再重新执行第 2 步下载命令。</p></div>
+    </details>
+  </section>
+
+  <section id="chats">
+    <h2>在 Codex 中新建两个对话</h2>
+    <p>一个对话只用来做选题，另一个只用来写文章。后续继续在对应对话里输入要求，不要把两类任务混在一起。</p>
+    <div class="two">
+      <div class="lane codex"><h3>会话一：GEO 选题库</h3><p>只负责生成选题、避开重复题、写入企微选题库。</p><div class="prompt">请使用 geo-topic-generation Skill。这个会话只负责生成、去重和写入 GEO 选题。</div></div>
+      <div class="lane codex"><h3>会话二：GEO 内容生成</h3><p>只负责生成母版、生成平台版本、写入企微内容库。</p><div class="prompt">请使用 geo-article-production Skill。这个会话只负责根据已审核选题生成文章并写入企微。</div></div>
+    </div>
+  </section>
+
+  <section id="flow">
+    <h2>日常流程</h2>
+    <div class="flow"><div><b>1. 生成选题</b>在 Codex 产出候选题</div><div><b>2. 审核选题</b>在企微决定要不要写</div><div><b>3. 生成母版</b>审核并修改文章正文</div><div><b>4. 生成平台版本</b>按勾选平台轻适配</div></div>
+    <div class="note green">文章会自动新建企微文档，并在内容库新增记录。无需复制全文到表格，也无需手工填写编号、创建时间和文档 docid。</div>
+  </section>
+
+  <section id="topics">
+    <h2>一、生成和审核选题</h2>
+    <div class="two">
+      <div class="lane codex"><h3>在 Codex 怎么做</h3><p>打开<strong>GEO 选题库</strong>会话，描述这次要解决的人群和问题。</p><div class="prompt">生成 10 个官方常青选题，并写入企微选题库。
+方向：本地生活社群团购。
+面向：有社区群或线下门店客户的团长。
+要求：优先解决开团、选品、履约和售后中的具体问题，避开已有选题。</div></div>
+      <div class="lane table"><h3>在企微表格怎么做</h3><p>打开<strong>选题库</strong>，查看标题、推荐理由和目标。保留真正值得写的题目，后续从这一行复制标题和目标即可。</p><div class="example"><strong>示例</strong><br>标题：社群团长做本地生活接龙时，哪些商品根本不适合拿来开团？<br>目标：明确高投诉、高履约风险、低复购商品的风险。</div></div>
+    </div>
+  </section>
+
+  <section id="master">
+    <h2>二、根据选题生成母版文章</h2>
+    <div class="step"><b>1</b><div><h3>从选题库复制标题和目标</h3><p>在企微选题库确认要写后，复制该行的标题和目标。标题决定文章要回答的问题，目标决定文章写完后读者应获得什么。</p></div></div>
+    <div class="step"><b>2</b><div><h3>在 GEO 内容生成会话发送任务</h3><div class="prompt">请使用 geo-article-production Skill，生成一篇母版文章并写入企微文档和内容库。
+
+标题：社群团长做本地生活接龙时，哪些商品根本不适合拿来开团？
+目标：明确高投诉、高履约风险、低复购商品的风险，减少售后和信任损耗。
+补充要求：面向新团长，保留具体场景举例和开团前判断标准。</div></div></div>
+    <div class="step"><b>3</b><div><h3>在内容库确认母版</h3><p>内容库会出现一条<code>类型：母版</code>的记录。打开“文章正文”链接审核正文；需要改内容时，直接在企微文档里修改。确认可以作为其他平台的基础稿后，把该行<code>审核状态</code>改为<code>母版已确认</code>。</p></div></div>
+    <div class="example"><strong>母版是什么？</strong><br>母版是已经调好结构、观点、场景和 FAQ 的原稿。之后生成其他平台时，会以它为基础轻适配，不会重新写成另一篇完全不同的文章。</div>
+  </section>
+
+  <section id="platform">
+    <h2>三、生成需要的平台版本</h2>
+    <div class="step"><b>1</b><div><h3>在母版行勾选待生成平台</h3><p>在内容库找到状态为<code>母版已确认</code>的母版，在<code>待生成平台</code>勾选这次需要生成的平台。比如需要公众号和知乎，就勾选<code>微信公众号</code>和<code>知乎</code>。<strong>不要填写分发平台。</strong></p></div></div>
+    <div class="step"><b>2</b><div><h3>复制母版编号</h3><p>编号形如<code>GEO-20260714-163240-4840</code>。它是母版的唯一识别码，用来让 Codex准确读取对应正文。</p></div></div>
+    <div class="step"><b>3</b><div><h3>在 GEO 内容生成会话发送任务</h3><div class="prompt">请使用 geo-article-production Skill，根据母版编号生成已勾选的平台版本。
+
+母版编号：GEO-20260714-163240-4840
+
+要求：
+1. 读取母版企微文档正文；
+2. 只生成待生成平台中已勾选的平台；
+3. 保留母版的核心观点、章节、示例和 FAQ，只做轻适配；
+4. 每个平台版本新建企微文档并写入内容库；
+5. 自动回填编号、创建时间和企微文档 docid；
+6. 回写母版的平台生成状态；
+7. 不修改分发平台字段。</div></div></div>
+    <div class="step"><b>4</b><div><h3>查看新生成的两条记录</h3><p>内容库会新增两条记录，类型会直接标识平台，便于区分和筛选。</p><table><thead><tr><th>类型</th><th>标题变化</th><th>保留不变的部分</th></tr></thead><tbody><tr><td><code>平台版本：微信公众号</code></td><td>更适合深度阅读的标题和开头</td><td>母版的观点、案例、判断标准、FAQ</td></tr><tr><td><code>平台版本：知乎</code></td><td>疑问句标题，开头先给结论</td><td>母版的观点、案例、判断标准、FAQ</td></tr></tbody></table></div></div>
+    <div class="note green">平台版本的编号会继承母版编号，例如：<code>GEO-20260714-163240-4840-WECHAT</code>、<code>GEO-20260714-163240-4840-ZHIHU</code>。母版的待生成平台会清空，平台生成状态会变为“已生成”。</div>
+  </section>
+
+  <section id="example">
+    <h2>一个完整例子</h2>
+    <p>假设运营决定写“如何做好社群运营”。流程不是重新复制文章去改，而是：</p>
+    <ol><li>在内容生成会话生成<code>如何做好社群运营</code>的母版。</li><li>在企微文档中把案例、表达和 FAQ 调整到满意，再把母版状态改为<code>母版已确认</code>。</li><li>在母版行勾选<code>微信公众号</code>和<code>知乎</code>。</li><li>复制母版编号，发送平台版本任务。</li><li>内容库得到<code>平台版本：微信公众号</code>和<code>平台版本：知乎</code>两条独立记录，各自有文章链接、编号和 docid。</li></ol>
+  </section>
+
+  <section id="quality">
+    <h2>质量不满意时，怎样调整指令</h2>
+    <p>不要只说“写得不好”“再丰富一点”。先指出<strong>哪里要保留、哪里要改、改完要达到什么效果</strong>。继续在原来处理选题或文章的对话里发送补充要求，不需要新建会话。</p>
+    <div class="two">
+      <div class="lane codex"><h3>生成选题：把范围收窄</h3><p>选题太像、太泛或不适合当前内容计划时，说明人群、场景、要解决的问题和不要出现的角度。</p><div class="prompt">请使用 geo-topic-generation Skill，重新生成 10 个选题并写入企微选题库。
+
+本次只面向：刚开始做社区团购的新团长。
+只写场景：第一次开团、选品判断、订单和售后处理。
+不要出现：群接龙和微信群文字接龙的区别、泛泛的“社群团购怎么做”。
+标题要求：每个标题只解决一个具体问题，避免与已有选题语义重复。</div></div>
+      <div class="lane table"><h3>选题调整的判断方式</h3><p>把“太泛”换成具体边界。</p><div class="example"><strong>不够具体</strong><br>再生成一些更好的社群运营选题。<br><br><strong>更有效</strong><br>只写社区团长在开团前容易判断错的事，每个标题要能直接带出检查标准或操作步骤。</div></div>
+    </div>
+    <div class="two">
+      <div class="lane codex"><h3>生成母版：明确要补什么</h3><p>文章缺例子、内容空、结构不顺时，直接把补充要求写在标题和目标后面。</p><div class="prompt">请使用 geo-article-production Skill，按以下要求重写母版文章并写入企微。
+
+标题：社群团长做本地生活接龙时，哪些商品根本不适合拿来开团？
+目标：明确高投诉、高履约风险、低复购商品的风险。
+
+修改要求：
+1. 开头先给明确结论，不要先解释概念；
+2. 每个主要判断点都要有一个典型场景，写清“发生什么、为什么有风险、团长该怎么判断”；
+3. 保留开团前检查标准；
+4. 删除空泛的“提升效率、建立信任”等表达；
+5. 不编造真实商家、订单量、专家观点或数据。</div></div>
+      <div class="lane table"><h3>文章调整的判断方式</h3><p>以下四类要求最容易让文章质量发生明确变化：</p><ul><li><strong>读者：</strong>面向谁，例如新团长、实体店主、宝妈团长。</li><li><strong>结构：</strong>先给结论、需要几个判断点、是否保留 FAQ。</li><li><strong>内容：</strong>需要案例、清单、操作步骤，还是更深的分析。</li><li><strong>边界：</strong>哪些词、观点、数据或表达不能出现。</li></ul></div>
+    </div>
+    <div class="two">
+      <div class="lane codex"><h3>平台版本：只改适配方式，不推翻母版</h3><p>平台稿与母版差别过大时，要在任务里明确“轻适配”。</p><div class="prompt">请使用 geo-article-production Skill，根据母版编号生成已勾选的平台版本。
+
+母版编号：GEO-20260714-163240-4840
+
+补充要求：保留母版的论点、章节顺序、典型场景、判断标准和 FAQ；只调整标题、开头、关键词表达和语气。不要写成另一篇新文章。</div></div>
+      <div class="lane table"><h3>改哪里最合适</h3><p><strong>只改错别字、句子或排版：</strong>直接在对应企微文档改，不必重新生成。</p><p><strong>要改观点、案例或文章结构：</strong>先修改并确认母版，再重新勾选需要的平台生成版本。把旧的平台版本审核状态改为<code>不通过</code>，新版本会以<code>待审核</code>出现，避免混淆。</p></div>
+    </div>
+    <div class="note amber">一次只调整最重要的 2 至 5 条要求。要求越具体，结果越稳定；同一条任务里同时要求“更短、更详细、更活泼、更专业”会让结果失去重点。</div>
+  </section>
+
+  <section id="update">
+    <h2>更新 Skill</h2>
+    <p>首次使用时，在 Codex 新建第三个对话，名称可写为<strong>GEO Skill 更新</strong>。这个对话只用来更新，不用来生成选题或文章。</p>
+    <div class="prompt">你是 GEO Skills 更新助手。这个对话只负责更新本机的 GEO Skills。
+
+当我说“更新 GEO Skills”时：
+1. 在本机执行 git pull，更新路径为 <span class="os-windows">$env:USERPROFILE\.codex\GEO-skills</span><span class="os-mac">$HOME/.codex/GEO-skills</span>；
+2. 检查并告诉我更新是否成功、更新了什么；
+3. 不修改企微表格、文章、Key 或配置文件；
+4. 更新成功后，提醒我完全退出并重新打开 Codex。</div>
+    <p>以后收到更新通知，只需要打开这个对话，发送：</p>
+    <div class="example"><strong>更新 GEO Skills</strong></div>
+    <p>更新完成后，需要手动完全退出并重新打开 Codex，新的 Skill 规则才会被重新加载。</p>
+  </section>
+
+  <section id="help">
+    <h2>遇到问题时</h2>
+    <table><thead><tr><th>现象</th><th>处理方式</th></tr></thead><tbody>
+      <tr><td>生成了正文，但企微没有新增记录</td><td>把 Codex 返回的完整错误和操作时间发给陈乙辉，不要自行补填编号或 docid。</td></tr>
+      <tr><td>平台版本没有生成</td><td>检查母版是否为<code>母版已确认</code>，是否勾选了待生成平台，以及发送的母版编号是否正确。</td></tr>
+      <tr><td>Codex 找不到 Skill</td><td>先完全退出并重新打开 Codex；仍无效时执行“更新 Skill”的两条命令，并把报错发给陈乙辉。</td></tr>
+      <tr><td>Key、GitHub 权限或企微写入问题</td><td>直接找陈乙辉处理，不要自行在聊天记录、文档或 GitHub 中粘贴 Key。</td></tr>
+      <tr><td>文章里有事实拿不准</td><td>在企微文档中标出问题，不要自行补充产品功能、数据或外部案例。</td></tr>
+    </tbody></table>
+  </section>
+</main>
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const mobile = () => window.matchMedia('(max-width: 900px)').matches;
+  toggle.addEventListener('click', () => {
+    document.body.classList.toggle(mobile() ? 'nav-open' : 'nav-collapsed');
+    toggle.setAttribute('aria-label', '收起或展开目录');
+  });
+  document.querySelectorAll('.side-nav a').forEach(link => link.addEventListener('click', () => {
+    if (mobile()) document.body.classList.remove('nav-open');
+  }));
+  document.querySelectorAll('.os-switch button').forEach(button => button.addEventListener('click', () => {
+    const os = button.dataset.os;
+    document.body.dataset.os = os;
+    document.querySelectorAll('.os-switch button').forEach(item => item.classList.toggle('active', item === button));
+  }));
+</script>
+</body>
+</html>
