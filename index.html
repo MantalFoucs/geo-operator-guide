@@ -13,7 +13,7 @@
   .nav-toggle { position:fixed; z-index:6; top:18px; left:calc(var(--sidebar) - 16px); width:32px; height:32px; border:1px solid #d0d5dd; border-radius:4px; background:#fff; color:#344054; font-size:18px; line-height:1; cursor:pointer; box-shadow:0 2px 8px rgb(16 24 40 / 12%); transition:left .22s ease; } .nav-toggle:hover { background:#f2f4f7; }
   main { width:min(calc(100vw - var(--sidebar) - 96px), 1040px); min-height:100vh; margin-left:calc(var(--sidebar) + 64px); padding:70px 0 104px; transition:margin-left .22s ease; }
   header { position:relative; padding:0 0 42px; border-bottom:1px solid var(--line); } h1,h2,h3,p { margin-top:0; } h1 { max-width:690px; font-size:34px; line-height:1.28; margin-bottom:10px; } h2 { font-size:23px; line-height:1.4; margin-bottom:17px; } h3 { font-size:16px; line-height:1.5; margin:0 0 7px; } p { margin-bottom:13px; } .muted { color:var(--muted); } .eyebrow { color:var(--teal); font-size:12px; font-weight:700; } .toc { display:none; }
-  .os-switch { position:absolute; top:0; right:0; display:inline-flex; border:1px solid var(--line); background:#fff; padding:3px; border-radius:5px; } .os-switch button { min-width:70px; padding:5px 9px; border:0; background:transparent; color:var(--muted); font:600 12px "Microsoft YaHei",sans-serif; cursor:pointer; } .os-switch button.active { background:var(--ink); color:#fff; } .os-mac { display:none; } body[data-os="mac"] .os-windows { display:none; } body[data-os="mac"] .os-mac { display:block; } body[data-os="mac"] span.os-mac { display:inline; }
+  .os-switch { position:absolute; top:0; right:0; display:inline-flex; border:1px solid var(--line); background:#fff; padding:3px; border-radius:5px; } .os-switch button { min-width:70px; padding:5px 9px; border:0; background:transparent; color:var(--muted); font:600 12px "Microsoft YaHei",sans-serif; cursor:pointer; } .os-switch button.active { background:var(--ink); color:#fff; } .updated-at { position:absolute; top:43px; right:0; color:var(--muted); font-size:12px; } .os-mac { display:none; } body[data-os="mac"] .os-windows { display:none; } body[data-os="mac"] .os-mac { display:block; } body[data-os="mac"] span.os-mac { display:inline; }
   section { padding:52px 0; border-bottom:1px solid var(--line); scroll-margin-top:20px; } section:last-of-type { border-bottom:0; } .flow { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); margin-top:22px; border-top:2px solid var(--ink); border-bottom:1px solid var(--line); } .flow div { min-height:94px; padding:16px 20px 18px 0; margin-right:20px; border-right:1px solid var(--line); } .flow div:not(:first-child) { padding-left:20px; } .flow div:nth-child(2n) { border-right:0; margin-right:0; } .flow div:nth-child(n+3) { border-top:1px solid var(--line); padding-top:18px; } .flow b { display:block; margin-bottom:5px; color:var(--blue); }
   .two { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:44px; margin-top:22px; } .three { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:30px; margin-top:22px; } .three .lane:nth-child(3) { grid-column:1 / -1; } .lane { min-width:0; padding:16px 0 4px; border-top:2px solid var(--line); } .lane.codex { border-color:var(--blue); } .lane.table { border-color:var(--teal); }
   .step { display:grid; grid-template-columns:34px 1fr; gap:14px; margin:24px 0; } .step > b { display:grid; place-items:center; align-self:start; width:27px; height:27px; background:var(--ink); color:#fff; font:11px Consolas,monospace; }
@@ -22,7 +22,7 @@
   table { width:100%; border-collapse:collapse; margin-top:13px; } th,td { padding:10px 8px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); } th { color:var(--muted); font-size:13px; font-weight:700; } ol,ul { margin:8px 0 12px; padding-left:22px; } li { margin:5px 0; }
   body.nav-collapsed { --sidebar:72px; } body.nav-collapsed .brand span, body.nav-collapsed .side-label, body.nav-collapsed .nav-label { display:none; } body.nav-collapsed .brand { min-width:0; margin:0 6px 30px; } body.nav-collapsed .side-nav { min-width:0; } body.nav-collapsed .side-nav a { justify-content:center; padding:9px 0; } body.nav-collapsed .nav-num { width:auto; } body.nav-collapsed main { margin-left:calc(var(--sidebar) + 64px); } body.nav-collapsed .nav-toggle { left:calc(var(--sidebar) - 16px); }
   @media (max-width:900px) { :root { --sidebar:264px; } main { width:min(100% - 36px, 800px); margin:0 auto; padding:64px 0 72px; } .sidebar { transform:translateX(-100%); } .nav-toggle { left:14px; } body.nav-open .sidebar { transform:translateX(0); box-shadow:18px 0 40px rgb(16 24 40 / 20%); } body.nav-open .nav-toggle { left:230px; } body.nav-collapsed { --sidebar:264px; } body.nav-collapsed .brand span, body.nav-collapsed .side-label, body.nav-collapsed .nav-label { display:initial; } body.nav-collapsed .brand { min-width:220px; margin:0 8px 30px; } body.nav-collapsed .side-nav { min-width:220px; } body.nav-collapsed .side-nav a { justify-content:flex-start; padding:8px 10px; } body.nav-collapsed .nav-num { width:25px; } body.nav-collapsed main { margin:0 auto; } .two,.three { grid-template-columns:1fr; gap:26px; } .flow { grid-template-columns:1fr 1fr; } }
-  @media (max-width:560px) { main { width:min(100% - 28px, 760px); padding-top:58px; } header { padding-top:48px; } .os-switch { left:0; right:auto; } h1 { font-size:28px; } section { padding:34px 0; } .flow { grid-template-columns:1fr; } .flow div,.flow div:not(:first-child) { min-height:auto; padding:12px 0; margin:0; border-right:0; border-top:1px solid var(--line); } .flow div:first-child { border-top:0; } table { font-size:13px; } }
+  @media (max-width:560px) { main { width:min(100% - 28px, 760px); padding-top:58px; } header { padding-top:72px; } .os-switch { left:0; right:auto; } .updated-at { top:48px; } h1 { font-size:28px; } section { padding:34px 0; } .flow { grid-template-columns:1fr; } .flow div,.flow div:not(:first-child) { min-height:auto; padding:12px 0; margin:0; border-right:0; border-top:1px solid var(--line); } .flow div:first-child { border-top:0; } table { font-size:13px; } }
 </style>
 </head>
 <body data-os="windows">
@@ -48,6 +48,7 @@
       <button type="button" class="active" data-os="windows">Windows</button>
       <button type="button" data-os="mac">macOS</button>
     </div>
+    <div class="updated-at">网页更新时间：<time id="updated-at" datetime="2026-07-14T18:58:00+08:00">2026-07-14 18:58</time></div>
     <div class="eyebrow">群接龙 GEO 内容生产</div>
     <h1>内容运营使用说明</h1>
     <p class="muted">适用于 GEO Skills 的首次安装和日常使用。日常只需使用 Codex 和企微智慧表格。</p>
@@ -225,6 +226,17 @@
     document.body.dataset.os = os;
     document.querySelectorAll('.os-switch button').forEach(item => item.classList.toggle('active', item === button));
   }));
+  fetch('https://api.github.com/repos/MantalFoucs/geo-operator-guide/commits/main')
+    .then(response => response.ok ? response.json() : null)
+    .then(commit => {
+      if (!commit) return;
+      const value = new Date(commit.commit.committer.date);
+      const label = new Intl.DateTimeFormat('zh-CN', { timeZone:'Asia/Shanghai', year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', hour12:false }).format(value).replaceAll('/', '-');
+      const target = document.getElementById('updated-at');
+      target.dateTime = value.toISOString();
+      target.textContent = label;
+    })
+    .catch(() => {});
 </script>
 </body>
 </html>
