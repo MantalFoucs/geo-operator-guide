@@ -36,9 +36,10 @@
     <a href="#topics" title="生成选题"><span class="nav-num">02</span><span class="nav-label">生成和审核选题</span></a>
     <a href="#master" title="母版文章"><span class="nav-num">03</span><span class="nav-label">生成母版文章</span></a>
     <a href="#platform" title="平台版本"><span class="nav-num">04</span><span class="nav-label">生成需要的平台版本</span></a>
-    <a href="#quality" title="调整质量"><span class="nav-num">05</span><span class="nav-label">调整指令与质量</span></a>
-    <a href="#update" title="更新 Skill"><span class="nav-num">06</span><span class="nav-label">更新 Skill</span></a>
-    <a href="#help" title="遇到问题"><span class="nav-num">07</span><span class="nav-label">遇到问题</span></a>
+    <a href="#distribution" title="自动分发"><span class="nav-num">05</span><span class="nav-label">自动分发与数据查看</span></a>
+    <a href="#quality" title="调整质量"><span class="nav-num">06</span><span class="nav-label">调整指令与质量</span></a>
+    <a href="#update" title="更新 Skill"><span class="nav-num">07</span><span class="nav-label">更新 Skill</span></a>
+    <a href="#help" title="遇到问题"><span class="nav-num">08</span><span class="nav-label">遇到问题</span></a>
   </nav>
 </aside>
 <main id="content">
@@ -134,6 +135,18 @@
 7. 不修改分发平台字段。</div></div></div>
     <div class="step"><b>4</b><div><h3>查看新生成的两条记录</h3><p>内容库会新增两条记录，类型会直接标识平台，便于区分和筛选。</p><table><thead><tr><th>类型</th><th>标题变化</th><th>保留不变的部分</th></tr></thead><tbody><tr><td><code>平台版本：微信公众号</code></td><td>更适合深度阅读的标题和开头</td><td>母版的观点、案例、判断标准、FAQ</td></tr><tr><td><code>平台版本：知乎</code></td><td>疑问句标题，开头先给结论</td><td>母版的观点、案例、判断标准、FAQ</td></tr></tbody></table></div></div>
     <div class="note green">平台版本的编号会继承母版编号，例如：<code>GEO-20260714-163240-4840-WECHAT</code>、<code>GEO-20260714-163240-4840-ZHIHU</code>。母版的待生成平台会清空，平台生成状态会变为“已生成”。</div>
+  </section>
+
+  <section id="distribution">
+    <h2>四、自动分发与数据查看</h2>
+    <p>研发侧每天<strong>下午 4 点</strong>自动检索内容库中<code>审核状态 = 审核通过</code>的文章并执行分发。当前自动分发仅支持<strong>群接龙官网</strong>。</p>
+    <div class="two">
+      <div class="lane codex"><h3>什么文章会进入自动分发</h3><p>只有已经审核完成、准备发布的<strong>平台版本</strong>才可以把审核状态改为<code>审核通过</code>。</p><ul><li><code>母版已确认</code>：用于生成平台版本，不会自动发布。</li><li><code>平台版本：群接龙官网</code>且审核通过：会在下午 4 点的任务中被检索。</li><li>下午 4 点后才审核通过的文章，等待下一次任务执行。</li></ul><div class="note amber">不要把母版改为“审核通过”，否则研发任务会把它当作待发布文章。</div></div>
+      <div class="lane table"><h3>运营需要做什么</h3><ol><li>生成并审核群接龙官网的平台版本。</li><li>确认内容无误后，把该平台版本的审核状态改为<code>审核通过</code>。</li><li>不手动填写<code>分发平台</code>、<code>发布状态</code>或<code>发布结果</code>。</li><li>等待下午 4 点自动任务执行，再查看内容库的发布回写结果。</li></ol></div>
+    </div>
+    <h3 style="margin-top:30px">在哪里看数据</h3>
+    <p>进入团长运营中心后台：<code>数据管理 → GEO 数据看板</code>。可按时间范围、文章标题或官网链接查询。</p>
+    <table><thead><tr><th>指标</th><th>含义</th></tr></thead><tbody><tr><td>人工 PV / UV</td><td>人工访问量与独立访问人数。</td></tr><tr><td>机器总 PV / UV</td><td>机器访问量与独立机器访问数。</td></tr><tr><td>最近机器访问</td><td>该文章最近一次机器访问时间。</td></tr><tr><td>官网链接</td><td>打开已发布到群接龙官网的文章页面。</td></tr></tbody></table>
   </section>
 
   <section id="example">
