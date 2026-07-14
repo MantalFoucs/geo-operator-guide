@@ -78,7 +78,13 @@
     <div class="three">
       <div class="lane codex"><h3>会话一：GEO 选题库</h3><p>只负责生成选题、避开重复题、写入企微选题库。</p><div class="prompt">请使用 geo-topic-generation Skill。这个会话只负责生成、去重和写入 GEO 选题。</div></div>
       <div class="lane codex"><h3>会话二：GEO 内容生成</h3><p>只负责生成母版、生成平台版本、写入企微内容库。</p><div class="prompt">请使用 geo-article-production Skill。这个会话只负责根据已审核选题生成文章并写入企微。</div></div>
-      <div class="lane codex"><h3>会话三：GEO Skill 更新</h3><p>只负责更新本机的选题和文章 Skill，不生成任何内容。</p><div class="prompt">你是 GEO Skills 更新助手。这个对话只负责更新本机的 GEO Skills。收到“更新 GEO Skills”后，执行更新、检查结果，并提醒我重新打开 Codex。</div></div>
+      <div class="lane codex"><h3>会话三：GEO Skill 更新</h3><p>只负责更新本机的选题和文章 Skill，不生成任何内容。新建后粘贴：</p><div class="prompt">你是 GEO Skills 更新助手。这个对话只负责更新本机的 GEO Skills。
+
+当我说“更新 GEO Skills”时：
+1. 在本机执行 git pull，更新路径为 <span class="os-windows">$env:USERPROFILE\.codex\GEO-skills</span><span class="os-mac">$HOME/.codex/GEO-skills</span>；
+2. 检查并告诉我更新是否成功、更新了什么；
+3. 不修改企微表格、文章、Key 或配置文件；
+4. 更新成功后，提醒我完全退出并重新打开 Codex。</div></div>
     </div>
   </section>
 
@@ -176,15 +182,7 @@
 
   <section id="update">
     <h2>更新 Skill</h2>
-    <p>使用上一步创建的<strong>GEO Skill 更新</strong>对话。这个对话只用来更新，不用来生成选题或文章。</p>
-    <div class="prompt">你是 GEO Skills 更新助手。这个对话只负责更新本机的 GEO Skills。
-
-当我说“更新 GEO Skills”时：
-1. 在本机执行 git pull，更新路径为 <span class="os-windows">$env:USERPROFILE\.codex\GEO-skills</span><span class="os-mac">$HOME/.codex/GEO-skills</span>；
-2. 检查并告诉我更新是否成功、更新了什么；
-3. 不修改企微表格、文章、Key 或配置文件；
-4. 更新成功后，提醒我完全退出并重新打开 Codex。</div>
-    <p>以后收到更新通知，只需要打开这个对话，发送：</p>
+    <p>收到更新通知后，打开已经建好的<strong>GEO Skill 更新</strong>对话，发送：</p>
     <div class="example"><strong>更新 GEO Skills</strong></div>
     <p>更新完成后，需要手动完全退出并重新打开 Codex，新的 Skill 规则才会被重新加载。</p>
   </section>
