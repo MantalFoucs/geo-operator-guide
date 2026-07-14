@@ -64,7 +64,7 @@
         <div class="step"><b>2</b><div><h3>下载 Skill 仓库</h3><div class="os-windows"><pre>git clone https://github.com/MantalFoucs/GEO-skills.git "$env:USERPROFILE\.codex\GEO-skills"</pre></div><div class="os-mac"><pre>git clone https://github.com/MantalFoucs/GEO-skills.git "$HOME/.codex/GEO-skills"</pre></div></div></div>
         <div class="step"><b>3</b><div><h3>安装两个 Skill</h3><p>以下命令按顺序逐行执行：</p><div class="os-windows"><pre>New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills"</pre><pre>cmd /c mklink /J "%USERPROFILE%\.codex\skills\geo-topic-generation" "%USERPROFILE%\.codex\GEO-skills\geo-topic-generation"</pre><pre>cmd /c mklink /J "%USERPROFILE%\.codex\skills\geo-article-production" "%USERPROFILE%\.codex\GEO-skills\geo-article-production"</pre></div><div class="os-mac"><pre>mkdir -p "$HOME/.codex/skills"</pre><pre>ln -s "$HOME/.codex/GEO-skills/geo-topic-generation" "$HOME/.codex/skills/geo-topic-generation"</pre><pre>ln -s "$HOME/.codex/GEO-skills/geo-article-production" "$HOME/.codex/skills/geo-article-production"</pre></div></div></div>
         <div class="step"><b>4</b><div><h3>配置企微自动写入</h3><p>需要自动创建企微文档、写入选题库和内容库时，向<strong>陈乙辉</strong>索取配置内容。不要在 Codex 对话、工作群或 GitHub 中发送 Key。</p><div class="os-windows"><pre>New-Item -ItemType Directory -Force "$env:USERPROFILE\.config\geo-skills"</pre><pre>notepad "$env:USERPROFILE\.config\geo-skills\.env"</pre></div><div class="os-mac"><pre>mkdir -p "$HOME/.config/geo-skills"</pre><pre>touch "$HOME/.config/geo-skills/.env" && open -e "$HOME/.config/geo-skills/.env"</pre></div><p>打开后粘贴陈乙辉提供的配置内容，保存即可。</p></div></div>
-        <div class="step"><b>5</b><div><h3>重新打开 Codex</h3><p>完全退出并重新打开 Codex，然后新建“选题”和“文章”两个对话开始使用。</p></div></div>
+        <div class="step"><b>5</b><div><h3>重新打开 Codex</h3><p>完全退出并重新打开 Codex，然后按下一节新建三个对话：选题、内容生成和 Skill 更新。</p></div></div>
       </div>
     </details>
     <details>
@@ -143,7 +143,7 @@
 5. 自动回填编号、创建时间和企微文档 docid；
 6. 回写母版的平台生成状态；
 7. 不修改分发平台字段。</div></div></div>
-    <div class="step"><b>4</b><div><h3>查看新生成的两条记录</h3><p>内容库会新增两条记录，类型会直接标识平台，便于区分和筛选。</p><table><thead><tr><th>类型</th><th>标题变化</th><th>保留不变的部分</th></tr></thead><tbody><tr><td><code>平台版本：微信公众号</code></td><td>更适合深度阅读的标题和开头</td><td>母版的观点、案例、判断标准、FAQ</td></tr><tr><td><code>平台版本：知乎</code></td><td>疑问句标题，开头先给结论</td><td>母版的观点、案例、判断标准、FAQ</td></tr></tbody></table></div></div>
+    <div class="step"><b>4</b><div><h3>查看新生成的平台版本记录</h3><p>内容库会按本次勾选的平台新增记录，类型会直接标识平台，便于区分和筛选。下表仅以微信公众号和知乎为例。</p><table><thead><tr><th>类型</th><th>标题变化</th><th>保留不变的部分</th></tr></thead><tbody><tr><td><code>平台版本：微信公众号</code></td><td>更适合深度阅读的标题和开头</td><td>母版的观点、案例、判断标准、FAQ</td></tr><tr><td><code>平台版本：知乎</code></td><td>疑问句标题，开头先给结论</td><td>母版的观点、案例、判断标准、FAQ</td></tr></tbody></table></div></div>
     <div class="note green">平台版本的编号会继承母版编号，例如：<code>GEO-20260714-163240-4840-WECHAT</code>、<code>GEO-20260714-163240-4840-ZHIHU</code>。母版的待生成平台会清空，平台生成状态会变为“已生成”。</div>
   </section>
 
@@ -152,7 +152,7 @@
     <p>研发侧每天<strong>下午 4 点</strong>自动检索内容库中<code>审核状态 = 审核通过</code>的文章并执行分发。任务<strong>不区分文章类型</strong>；当前自动分发目标仅支持<strong>群接龙官网</strong>。</p>
     <div class="two">
       <div class="lane codex"><h3>什么文章会进入自动分发</h3><p>任务只判断<code>审核状态</code>。任何类型的文章一旦改为<code>审核通过</code>，都会在下午 4 点任务中被检索，并尝试分发到当前支持的群接龙官网。</p><ul><li><code>母版已确认</code>：用于生成平台版本，不会自动发布。</li><li><code>审核通过</code>：进入自动分发队列，不区分母版或平台版本。</li><li>下午 4 点后才审核通过的文章，等待下一次任务执行。</li></ul><div class="note amber">不要把母版改为“审核通过”，否则研发任务会把它当作待发布文章。</div></div>
-      <div class="lane table"><h3>运营需要做什么</h3><ol><li>生成并审核群接龙官网的平台版本。</li><li>确认内容无误后，把该平台版本的审核状态改为<code>审核通过</code>。</li><li>不手动填写<code>分发平台</code>、<code>发布状态</code>或<code>发布结果</code>。</li><li>等待下午 4 点自动任务执行，再查看内容库的发布回写结果。</li></ol></div>
+      <div class="lane table"><h3>运营需要做什么</h3><ol><li>确认这篇文章就是准备发布到群接龙官网的最终稿。</li><li>把该最终稿的审核状态改为<code>审核通过</code>。</li><li>不手动填写<code>分发平台</code>、<code>发布状态</code>或<code>发布结果</code>。</li><li>等待下午 4 点自动任务执行，再查看内容库的发布回写结果。</li></ol></div>
     </div>
     <h3 style="margin-top:30px">在哪里看数据</h3>
     <p>进入<a href="https://opadmin.qunjielong.com/#/data-management/geo-access-statistics" target="_blank" rel="noopener">GEO 数据看板</a>：<code>数据管理 → GEO 数据看板</code>。可按时间范围、文章标题或官网链接查询。</p>
@@ -162,7 +162,7 @@
   <section id="example">
     <h2>一个完整例子</h2>
     <p>假设运营决定写“如何做好社群运营”。流程不是重新复制文章去改，而是：</p>
-    <ol><li>在内容生成会话生成<code>如何做好社群运营</code>的母版。</li><li>在企微文档中把案例、表达和 FAQ 调整到满意，再把母版状态改为<code>母版已确认</code>。</li><li>在母版行勾选<code>微信公众号</code>和<code>知乎</code>。</li><li>复制母版编号，发送平台版本任务。</li><li>内容库得到<code>平台版本：微信公众号</code>和<code>平台版本：知乎</code>两条独立记录，各自有文章链接、编号和 docid。</li></ol>
+    <ol><li>在内容生成会话生成<code>如何做好社群运营</code>的母版。</li><li>在企微文档中把案例、表达和 FAQ 调整到满意，再把母版状态改为<code>母版已确认</code>。</li><li>本例勾选<code>微信公众号</code>和<code>知乎</code>两个平台。</li><li>复制母版编号，发送平台版本任务。</li><li>因为本例勾选了两个平台，内容库会生成<code>平台版本：微信公众号</code>和<code>平台版本：知乎</code>两条记录，各自有文章链接、编号和 docid。</li></ol>
   </section>
 
   <section id="quality">
@@ -214,7 +214,7 @@
     <table><thead><tr><th>现象</th><th>处理方式</th></tr></thead><tbody>
       <tr><td>生成了正文，但企微没有新增记录</td><td>把 Codex 返回的完整错误和操作时间发给陈乙辉，不要自行补填编号或 docid。</td></tr>
       <tr><td>平台版本没有生成</td><td>检查母版是否为<code>母版已确认</code>，是否勾选了待生成平台，以及发送的母版编号是否正确。</td></tr>
-      <tr><td>Codex 找不到 Skill</td><td>先完全退出并重新打开 Codex；仍无效时执行“更新 Skill”的两条命令，并把报错发给陈乙辉。</td></tr>
+      <tr><td>Codex 找不到 Skill</td><td>先完全退出并重新打开 Codex；仍无效时打开“GEO Skill 更新”对话并发送<code>更新 GEO Skills</code>，再把报错发给陈乙辉。</td></tr>
       <tr><td>Key、GitHub 权限或企微写入问题</td><td>直接找陈乙辉处理，不要自行在聊天记录、文档或 GitHub 中粘贴 Key。</td></tr>
       <tr><td>文章里有事实拿不准</td><td>在企微文档中标出问题，不要自行补充产品功能、数据或外部案例。</td></tr>
     </tbody></table>
