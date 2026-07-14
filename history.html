@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GEO 系统档案</title>
+<style>
+  :root { --ink:#182230; --muted:#667085; --line:#e3e7ec; --canvas:#f7f8fa; --blue:#175cd3; --teal:#0f766e; --sidebar:264px; }
+  * { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; background:var(--canvas); color:var(--ink); font:15px/1.8 "Microsoft YaHei","Segoe UI",sans-serif; }
+  .sidebar { position:fixed; inset:0 auto 0 0; z-index:4; width:var(--sidebar); padding:26px 16px; overflow:hidden; background:#101828; color:#d0d5dd; transition:width .22s ease,transform .22s ease; } .brand { display:flex; gap:11px; align-items:center; min-width:220px; margin:0 8px 30px; color:#fff; font-weight:700; } .brand-mark { display:grid; place-items:center; width:29px; height:29px; background:#fff; color:#101828; font:700 12px Arial,sans-serif; } .brand small { display:block; color:#98a2b3; font-size:11px; font-weight:400; }
+  .side-label { margin:0 10px 8px; color:#98a2b3; font-size:11px; font-weight:700; } .side-nav { display:grid; gap:2px; min-width:220px; } .side-nav a { display:flex; gap:10px; align-items:center; padding:8px 10px; color:#d0d5dd; text-decoration:none; border-left:2px solid transparent; } .side-nav a:hover { color:#fff; background:#1d2939; } .nav-num { width:25px; color:#84adff; font:11px Consolas,monospace; } .nav-label { white-space:nowrap; }
+  .nav-toggle { position:fixed; z-index:6; top:18px; left:calc(var(--sidebar) - 16px); width:32px; height:32px; border:1px solid #d0d5dd; border-radius:4px; background:#fff; color:#344054; font-size:18px; cursor:pointer; box-shadow:0 2px 8px rgb(16 24 40 / 12%); transition:left .22s ease; }
+  main { width:min(100% - 64px, 930px); min-height:100vh; margin-left:calc(var(--sidebar) + 64px); padding:64px 0 96px; transition:margin-left .22s ease; } header { position:relative; padding-bottom:42px; border-bottom:1px solid var(--line); } h1,h2,h3,p { margin-top:0; } h1 { font-size:34px; line-height:1.28; margin-bottom:10px; } h2 { font-size:23px; line-height:1.4; margin-bottom:12px; } h3 { font-size:16px; margin-bottom:5px; } .eyebrow { color:var(--teal); font-size:12px; font-weight:700; } .muted { color:var(--muted); } .guide-link { position:absolute; top:7px; right:0; color:var(--blue); text-decoration:none; font-size:13px; font-weight:700; } .guide-link:hover { text-decoration:underline; }
+  section { padding:46px 0; border-bottom:1px solid var(--line); scroll-margin-top:20px; } .status { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:22px; border-top:2px solid var(--ink); border-bottom:1px solid var(--line); } .status div { padding:14px 0 16px; } .status b { display:block; color:var(--blue); margin-bottom:4px; } .note { margin-top:20px; padding:13px 16px; border-left:3px solid var(--teal); background:#ecfdf9; color:#115e59; }
+  .entry { display:grid; grid-template-columns:132px 1fr; gap:26px; padding:27px 0; border-top:1px solid var(--line); } .date { color:var(--muted); font:12px Consolas,monospace; padding-top:4px; } .entry:first-of-type { border-top:2px solid var(--ink); } .entry ul { margin:8px 0 0; padding-left:20px; } .entry li { margin:5px 0; } .tag { display:inline-block; margin-right:6px; padding:1px 6px; background:#eef5ff; color:var(--blue); font-size:12px; font-weight:700; }
+  body.nav-collapsed { --sidebar:72px; } body.nav-collapsed .brand span,body.nav-collapsed .side-label,body.nav-collapsed .nav-label { display:none; } body.nav-collapsed .brand { min-width:0; margin:0 6px 30px; } body.nav-collapsed .side-nav { min-width:0; } body.nav-collapsed .side-nav a { justify-content:center; padding:9px 0; } body.nav-collapsed .nav-num { width:auto; }
+  @media (max-width:900px) { :root { --sidebar:264px; } main { width:min(100% - 36px,760px); margin:0 auto; padding:64px 0 72px; } .sidebar { transform:translateX(-100%); } .nav-toggle { left:14px; } body.nav-open .sidebar { transform:translateX(0); box-shadow:18px 0 40px rgb(16 24 40 / 20%); } body.nav-open .nav-toggle { left:230px; } .status { grid-template-columns:1fr; gap:0; } .entry { grid-template-columns:1fr; gap:6px; } }
+  @media (max-width:560px) { main { width:min(100% - 28px,760px); padding-top:58px; } h1 { font-size:28px; } section { padding:34px 0; } }
+</style>
+</head>
+<body>
+<button class="nav-toggle" id="nav-toggle" type="button" aria-label="收起目录" title="收起或展开目录">☰</button>
+<aside class="sidebar">
+  <div class="brand"><span class="brand-mark">GEO</span><span>系统档案<small>变更记录</small></span></div>
+  <p class="side-label">日期</p>
+  <nav class="side-nav" aria-label="档案目录">
+    <a href="index.html" title="使用教程"><span class="nav-num">↗</span><span class="nav-label">使用教程</span></a>
+    <a href="#current"><span class="nav-num">NOW</span><span class="nav-label">当前状态</span></a>
+    <a href="#20260714"><span class="nav-num">0714</span><span class="nav-label">2026-07-14</span></a>
+    <a href="#20260713"><span class="nav-num">0713</span><span class="nav-label">2026-07-13</span></a>
+    <a href="#20260710"><span class="nav-num">0710</span><span class="nav-label">2026-07-10</span></a>
+    <a href="#20260708"><span class="nav-num">0708</span><span class="nav-label">2026-07-08</span></a>
+    <a href="#20260706"><span class="nav-num">0706</span><span class="nav-label">2026-07-06</span></a>
+  </nav>
+</aside>
+<main>
+  <header>
+    <a class="guide-link" href="index.html">使用教程</a>
+    <div class="eyebrow">群接龙 GEO 内容生产</div>
+    <h1>系统档案</h1>
+    <p class="muted">按日期记录系统规则、流程与交付方式的结构性调整。日常操作请从顶部“使用教程”进入。</p>
+  </header>
+  <section id="current">
+    <h2>当前状态</h2>
+    <div class="status"><div><b>选题</b>Codex 生成、知识库约束、去重后写入企微选题库。</div><div><b>内容</b>先生成母版，再按勾选平台生成轻适配版本并写入企微。</div><div><b>分发</b>仅平台版本的“审核通过”可进入研发自动分发逻辑。</div></div>
+    <div class="note">记录规则：每次影响运营操作、内容质量、企微写入或自动分发的改动，都在本页按日期新增一条。纯文案微调不单独记档。</div>
+  </section>
+  <section id="20260714">
+    <h2>2026-07-14</h2>
+    <div class="entry"><div class="date">07-14<br>内容生产</div><div><span class="tag">状态规则</span><h3>母版确认与自动分发解耦</h3><p>新增母版状态“母版已确认”。母版定稿后使用该状态生成平台版本；“审核通过”只给最终平台版本使用。</p><ul><li>避免母版被研发按“审核通过”直接发布。</li><li>平台版本审核通过后，才进入自动分发。</li></ul></div></div>
+    <div class="entry"><div class="date">07-14<br>内容生产</div><div><span class="tag">内容库</span><h3>平台版本在类型中直接标识平台</h3><p>平台版本类型统一写为“平台版本：平台名称”，例如“平台版本：微信公众号”“平台版本：知乎”。</p><ul><li>不新增额外字段，也不写入“分发平台”。</li><li>母版编号作为子版本编号前缀，便于唯一定位。</li></ul></div></div>
+    <div class="entry"><div class="date">07-14<br>运营交付</div><div><span class="tag">使用方式</span><h3>运营改用 Codex Skills 处理选题和文章</h3><p>建立选题、内容生成、Skill 更新三个专用对话。文章会创建企微文档、回写内容库编号、创建时间和文档 docid。</p><ul><li>六位指定成员自动获得新建文档编辑权限。</li><li>教程新增 Windows/macOS 切换、质量调整示例和更新说明。</li></ul></div></div>
+    <div class="entry"><div class="date">07-14<br>站点</div><div><span class="tag">文档</span><h3>使用教程发布为公开网页</h3><p>使用教程从本地 HTML 改为公开静态站点，方便同事直接访问；公开页面不包含 Key、企微配置或知识库。</p></div></div>
+  </section>
+  <section id="20260713">
+    <h2>2026-07-13</h2>
+    <div class="entry"><div class="date">07-13<br>内容质量</div><div><span class="tag">证据</span><h3>外部信息由“热点标题”调整为“标题相关证据”</h3><p>文章生成不再把无关热榜标题当作论据。外部检索只在标题、摘要和正文都相关时使用；没有可靠来源时，使用知识库和明确标注的典型场景。</p><ul><li>文章结构固定为结论、分析、场景/判断标准、FAQ。</li><li>不编造商家、订单量、数据或专家观点。</li></ul></div></div>
+  </section>
+  <section id="20260710">
+    <h2>2026-07-10</h2>
+    <div class="entry"><div class="date">07-10<br>选题库</div><div><span class="tag">去重</span><h3>选题生成增加语义去重与范围约束</h3><p>针对“同一问题换一种问法”造成的重复选题，选题流程增加已有选题比对和主题边界限制。</p><ul><li>要求每个标题解决一个具体问题。</li><li>减少“群接龙和文字接龙有什么区别”等重复泛题。</li></ul></div></div>
+  </section>
+  <section id="20260708">
+    <h2>2026-07-08</h2>
+    <div class="entry"><div class="date">07-08<br>内容模型</div><div><span class="tag">母版模式</span><h3>确定“母版 + 平台版本”内容生产方式</h3><p>先把文章的观点、结构、细节和案例调成母版，再根据分发平台做标题、开头、关键词与语气的轻适配。</p><ul><li>避免同一选题在不同平台被重写成完全不同的文章。</li><li>平台版本保留母版的论点、章节、示例、判断标准与 FAQ。</li></ul></div></div>
+  </section>
+  <section id="20260706">
+    <h2>2026-07-06</h2>
+    <div class="entry"><div class="date">07-06<br>流程起点</div><div><span class="tag">Dify</span><h3>启动 GEO 选题与内容生产流程整理</h3><p>开始梳理选题库、内容库和企微文档写入链路，明确内容生成需要依据标题、目标、知识库和平台规则。</p></div></div>
+  </section>
+</main>
+<script>
+  const toggle=document.getElementById('nav-toggle');
+  const mobile=()=>window.matchMedia('(max-width:900px)').matches;
+  toggle.addEventListener('click',()=>document.body.classList.toggle(mobile()?'nav-open':'nav-collapsed'));
+  document.querySelectorAll('.side-nav a').forEach(link=>link.addEventListener('click',()=>{if(mobile())document.body.classList.remove('nav-open');}));
+</script>
+</body>
+</html>
