@@ -15,13 +15,13 @@
   header { position:relative; padding:0 0 42px; border-bottom:1px solid var(--line); } h1,h2,h3,p { margin-top:0; } h1 { max-width:690px; font-size:34px; line-height:1.28; margin-bottom:10px; } h2 { font-size:23px; line-height:1.4; margin-bottom:17px; } h3 { font-size:16px; line-height:1.5; margin:0 0 7px; } p { margin-bottom:13px; } .muted { color:var(--muted); } .eyebrow { color:var(--teal); font-size:12px; font-weight:700; } .toc { display:none; }
   .os-switch { position:absolute; top:0; right:0; display:inline-flex; border:1px solid var(--line); background:#fff; padding:3px; border-radius:5px; } .os-switch button { min-width:70px; padding:5px 9px; border:0; background:transparent; color:var(--muted); font:600 12px "Microsoft YaHei",sans-serif; cursor:pointer; } .os-switch button.active { background:var(--ink); color:#fff; } .os-mac { display:none; } body[data-os="mac"] .os-windows { display:none; } body[data-os="mac"] .os-mac { display:block; } body[data-os="mac"] span.os-mac { display:inline; }
   section { padding:46px 0; border-bottom:1px solid var(--line); scroll-margin-top:20px; } section:last-of-type { border-bottom:0; } .flow { display:grid; grid-template-columns:repeat(4,1fr); margin-top:22px; border-top:2px solid var(--ink); border-bottom:1px solid var(--line); } .flow div { min-height:110px; padding:14px 14px 16px 0; margin-right:14px; border-right:1px solid var(--line); } .flow div:not(:first-child) { padding-left:14px; } .flow div:last-child { border-right:0; margin-right:0; } .flow b { display:block; margin-bottom:5px; color:var(--blue); }
-  .two { display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:19px; } .lane { padding-top:14px; border-top:2px solid var(--line); } .lane.codex { border-color:var(--blue); } .lane.table { border-color:var(--teal); }
+  .two { display:grid; grid-template-columns:1fr 1fr; gap:36px; margin-top:19px; } .three { display:grid; grid-template-columns:repeat(3,1fr); gap:26px; margin-top:19px; } .lane { padding-top:14px; border-top:2px solid var(--line); } .lane.codex { border-color:var(--blue); } .lane.table { border-color:var(--teal); }
   .step { display:grid; grid-template-columns:34px 1fr; gap:14px; margin:24px 0; } .step > b { display:grid; place-items:center; align-self:start; width:27px; height:27px; background:var(--ink); color:#fff; font:11px Consolas,monospace; }
   .prompt { margin:14px 0; border-left:3px solid var(--blue); background:var(--blue-soft); padding:15px 17px; white-space:pre-wrap; line-height:1.75; } code { padding:2px 5px; background:#f2f4f7; border-radius:3px; font:13px Consolas,monospace; word-break:break-all; } pre { margin:13px 0; padding:15px 17px; overflow:auto; white-space:pre-wrap; background:#101828; color:#eff4fa; border-radius:4px; font:13px/1.72 Consolas,monospace; }
   .note { margin:20px 0 0; padding:13px 16px; border-left:3px solid; } .note.green { background:var(--teal-soft); border-color:var(--teal); color:#115e59; } .note.amber { background:var(--amber-soft); border-color:var(--amber); color:#7a4d0b; } details { margin-top:12px; border-top:1px solid var(--line); } summary { padding:13px 0; color:var(--blue); font-weight:700; cursor:pointer; } details > div { padding:0 0 8px; } .example { margin:15px 0; padding:14px 16px; border-left:3px solid var(--plum); background:var(--plum-soft); } .example strong { color:var(--plum); }
   table { width:100%; border-collapse:collapse; margin-top:13px; } th,td { padding:10px 8px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); } th { color:var(--muted); font-size:13px; font-weight:700; } ol,ul { margin:8px 0 12px; padding-left:22px; } li { margin:5px 0; }
   body.nav-collapsed { --sidebar:72px; } body.nav-collapsed .brand span, body.nav-collapsed .side-label, body.nav-collapsed .nav-label { display:none; } body.nav-collapsed .brand { min-width:0; margin:0 6px 30px; } body.nav-collapsed .side-nav { min-width:0; } body.nav-collapsed .side-nav a { justify-content:center; padding:9px 0; } body.nav-collapsed .nav-num { width:auto; } body.nav-collapsed main { margin-left:calc(var(--sidebar) + 64px); } body.nav-collapsed .nav-toggle { left:calc(var(--sidebar) - 16px); }
-  @media (max-width:900px) { :root { --sidebar:264px; } main { width:min(100% - 36px, 760px); margin:0 auto; padding:64px 0 72px; } .sidebar { transform:translateX(-100%); } .nav-toggle { left:14px; } body.nav-open .sidebar { transform:translateX(0); box-shadow:18px 0 40px rgb(16 24 40 / 20%); } body.nav-open .nav-toggle { left:230px; } body.nav-collapsed { --sidebar:264px; } body.nav-collapsed .brand span, body.nav-collapsed .side-label, body.nav-collapsed .nav-label { display:initial; } body.nav-collapsed .brand { min-width:220px; margin:0 8px 30px; } body.nav-collapsed .side-nav { min-width:220px; } body.nav-collapsed .side-nav a { justify-content:flex-start; padding:8px 10px; } body.nav-collapsed .nav-num { width:25px; } body.nav-collapsed main { margin:0 auto; } .two { grid-template-columns:1fr; gap:22px; } .flow { grid-template-columns:1fr 1fr; } .flow div:nth-child(2) { border-right:0; } .flow div:nth-child(n+3) { border-top:1px solid var(--line); padding-top:14px; } }
+  @media (max-width:900px) { :root { --sidebar:264px; } main { width:min(100% - 36px, 760px); margin:0 auto; padding:64px 0 72px; } .sidebar { transform:translateX(-100%); } .nav-toggle { left:14px; } body.nav-open .sidebar { transform:translateX(0); box-shadow:18px 0 40px rgb(16 24 40 / 20%); } body.nav-open .nav-toggle { left:230px; } body.nav-collapsed { --sidebar:264px; } body.nav-collapsed .brand span, body.nav-collapsed .side-label, body.nav-collapsed .nav-label { display:initial; } body.nav-collapsed .brand { min-width:220px; margin:0 8px 30px; } body.nav-collapsed .side-nav { min-width:220px; } body.nav-collapsed .side-nav a { justify-content:flex-start; padding:8px 10px; } body.nav-collapsed .nav-num { width:25px; } body.nav-collapsed main { margin:0 auto; } .two,.three { grid-template-columns:1fr; gap:22px; } .flow { grid-template-columns:1fr 1fr; } .flow div:nth-child(2) { border-right:0; } .flow div:nth-child(n+3) { border-top:1px solid var(--line); padding-top:14px; } }
   @media (max-width:560px) { main { width:min(100% - 28px, 760px); padding-top:58px; } header { padding-top:48px; } .os-switch { left:0; right:auto; } h1 { font-size:28px; } section { padding:34px 0; } .flow { grid-template-columns:1fr; } .flow div,.flow div:not(:first-child) { min-height:auto; padding:12px 0; margin:0; border-right:0; border-top:1px solid var(--line); } .flow div:first-child { border-top:0; } table { font-size:13px; } }
 </style>
 </head>
@@ -32,7 +32,7 @@
   <p class="side-label">目录</p>
   <nav class="side-nav" aria-label="文档目录">
     <a href="#install" title="首次安装"><span class="nav-num">00</span><span class="nav-label">首次安装</span></a>
-    <a href="#chats" title="新建两个对话"><span class="nav-num">01</span><span class="nav-label">新建两个对话</span></a>
+    <a href="#chats" title="新建三个对话"><span class="nav-num">01</span><span class="nav-label">新建三个对话</span></a>
     <a href="#topics" title="生成选题"><span class="nav-num">02</span><span class="nav-label">生成和审核选题</span></a>
     <a href="#master" title="母版文章"><span class="nav-num">03</span><span class="nav-label">生成母版文章</span></a>
     <a href="#platform" title="平台版本"><span class="nav-num">04</span><span class="nav-label">生成需要的平台版本</span></a>
@@ -72,11 +72,12 @@
   </section>
 
   <section id="chats">
-    <h2>在 Codex 中新建两个对话</h2>
-    <p>一个对话只用来做选题，另一个只用来写文章。后续继续在对应对话里输入要求，不要把两类任务混在一起。</p>
-    <div class="two">
+    <h2>在 Codex 中新建三个对话</h2>
+    <p>选题、文章和更新分别放在三个对话中。后续继续在对应对话里输入要求，不要把不同任务混在一起。</p>
+    <div class="three">
       <div class="lane codex"><h3>会话一：GEO 选题库</h3><p>只负责生成选题、避开重复题、写入企微选题库。</p><div class="prompt">请使用 geo-topic-generation Skill。这个会话只负责生成、去重和写入 GEO 选题。</div></div>
       <div class="lane codex"><h3>会话二：GEO 内容生成</h3><p>只负责生成母版、生成平台版本、写入企微内容库。</p><div class="prompt">请使用 geo-article-production Skill。这个会话只负责根据已审核选题生成文章并写入企微。</div></div>
+      <div class="lane codex"><h3>会话三：GEO Skill 更新</h3><p>只负责更新本机的选题和文章 Skill，不生成任何内容。</p><div class="prompt">你是 GEO Skills 更新助手。这个对话只负责更新本机的 GEO Skills。收到“更新 GEO Skills”后，执行更新、检查结果，并提醒我重新打开 Codex。</div></div>
     </div>
   </section>
 
@@ -174,7 +175,7 @@
 
   <section id="update">
     <h2>更新 Skill</h2>
-    <p>首次使用时，在 Codex 新建第三个对话，名称可写为<strong>GEO Skill 更新</strong>。这个对话只用来更新，不用来生成选题或文章。</p>
+    <p>使用上一步创建的<strong>GEO Skill 更新</strong>对话。这个对话只用来更新，不用来生成选题或文章。</p>
     <div class="prompt">你是 GEO Skills 更新助手。这个对话只负责更新本机的 GEO Skills。
 
 当我说“更新 GEO Skills”时：
