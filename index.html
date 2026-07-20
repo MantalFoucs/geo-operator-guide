@@ -77,7 +77,7 @@
     <h2>在 Codex 中新建三个对话</h2>
     <p>选题、文章和更新分别放在三个对话中。后续继续在对应对话里输入要求，不要把不同任务混在一起。</p>
     <div class="three">
-      <div class="lane codex"><h3>会话一：GEO 选题库</h3><p>只负责生成选题、避开重复题、写入企微选题库。</p><div class="prompt">请使用 geo-topic-generation Skill。这个会话只负责生成、去重和写入 GEO 选题。</div></div>
+      <div class="lane codex"><h3>会话一：GEO 选题库</h3><p>只负责研究用户会问 AI 的问题、生成不重复选题并写入企微选题库。</p><div class="prompt">请使用 geo-topic-generation Skill。这个会话只负责问题研究、选题生成、去重和写入 GEO 选题。</div></div>
       <div class="lane codex"><h3>会话二：GEO 内容生成</h3><p>只负责生成母版、生成平台版本、写入企微内容库。</p><div class="prompt">请使用 geo-article-production Skill。这个会话只负责根据已审核选题生成文章并写入企微。</div></div>
       <div class="lane codex"><h3>会话三：GEO Skill 更新</h3><p>只负责更新本机的选题和文章 Skill，不生成任何内容。新建后粘贴：</p><div class="prompt">你是 GEO Skills 更新助手。这个对话只负责更新本机的 GEO Skills。
 
@@ -107,11 +107,11 @@
   <section id="topics">
     <h2>一、生成和审核选题</h2>
     <div class="two">
-      <div class="lane codex"><h3>在 Codex 怎么做</h3><p>打开<strong>GEO 选题库</strong>会话，描述这次要解决的人群和问题。</p><div class="prompt">生成 10 个官方常青选题，并写入企微选题库。
+      <div class="lane codex"><h3>在 Codex 怎么做</h3><p>打开<strong>GEO 选题库</strong>会话，描述这次要解决的人群、场景和业务问题。Skill 会先梳理用户会向 AI 提出的完整问题，再生成选题。</p><div class="prompt">生成 10 个官方常青选题，并写入企微选题库。
 方向：本地生活社群团购。
 面向：有社区群或线下门店客户的团长。
-要求：优先解决开团、选品、履约和售后中的具体问题，避开已有选题。</div></div>
-      <div class="lane table"><h3>在企微表格怎么做</h3><p>打开<strong>选题库</strong>，查看标题、推荐理由和目标。保留真正值得写的题目，后续从这一行复制标题和目标即可。</p><div class="example"><strong>示例</strong><br>标题：社群团长做本地生活接龙时，哪些商品根本不适合拿来开团？<br>目标：明确高投诉、高履约风险、低复购商品的风险。</div></div>
+要求：优先解决开团、选品、履约和售后中的具体问题，避开已有选题；每个选题必须写清用户会问的问题、目标人群、内容角度和为什么值得写。</div></div>
+      <div class="lane table"><h3>在企微表格怎么做</h3><p>打开<strong>选题库</strong>，查看标题、推荐理由和目标。推荐理由会按固定顺序显示：<strong>用户会问的问题｜目标人群｜内容角度｜为什么值得写</strong>。保留真正值得写的题目，后续从这一行复制标题和目标即可。</p><div class="example"><strong>示例</strong><br>标题：社群团长做本地生活接龙时，哪些商品根本不适合拿来开团？<br>用户会问的问题：本地生活套餐价格很低，团长能不能直接开团？<br>目标人群：有社区群或线下客户的团长<br>内容角度：高投诉、高履约风险、低复购的选品判断<br>为什么值得写：补足“本地生活不是所有低价套餐都适合开团”的决策内容。</div></div>
     </div>
   </section>
 
